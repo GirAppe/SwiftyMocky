@@ -1,5 +1,20 @@
 
-#if Mocky
+#if MockyInApp
+import SwiftyMocky
+<%# ================================================== IMPORTS InAPP -%><%_ -%>
+    <%_ if let imported = arguments["import"] as? String { -%>
+        <%_ %>import <%= imported %>
+    <%_ } -%>
+    <%_ if let allimported = arguments["import"] as? [String] { -%>
+        <%_ for imported in allimported { -%>
+            <%_ %>import <%= imported %>
+        <%_ } -%>
+    <%_ } -%>
+
+    func XCTAssert(_ expression: @autoclosure () -> Bool, _ message: @autoclosure () -> String = "Assertion failed", file: StaticString = #file, line: UInt = #line) {
+        assert(expression, message, file: file, line: line)
+    }
+#elseif Mocky
 import SwiftyMocky
 import XCTest
 <%# ================================================== IMPORTS -%><%_ -%>
@@ -755,8 +770,8 @@ class <%= type.name %>Mock<%= genericTypesModifier %>:<%= type.annotations["Objc
     <%_ -%>
         static func compareParameters(lhs: StaticMethodType, rhs: StaticMethodType, matcher: Matcher) -> Bool {
             switch (lhs, rhs) { <%_ for method in wrappedStaticMethods { %>
-                <%= method.equalCase -%> <% for parameter in method.parameters { %>
-                    <%= parameter.comparator -%> <%  } %>
+                <%= method.equalCase -%><% for parameter in method.parameters { %>
+                    <%= parameter.comparator -%> <% } %>
                     return true <% } %>
                 <%_ for variable in allStaticVariables { -%>
                 <%= propertyMethodTypesCompare(variable) %>

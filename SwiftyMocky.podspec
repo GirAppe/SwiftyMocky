@@ -14,11 +14,11 @@ Pod::Spec.new do |s|
 Library that uses metaprogramming technique to generate mocks based on sources, that makes testing for Swift Mockito-like.
                        DESC
 
-  s.homepage         = 'https://github.com/MakeAWishFoundation/SwiftyMocky'
-  s.screenshots      = 'https://raw.githubusercontent.com/MakeAWishFoundation/SwiftyMocky/1.0.0/icon.png'
+  s.homepage         = 'https://github.com/GirAppe/SwiftyMocky'
+  s.screenshots      = 'https://raw.githubusercontent.com/GirAppe/SwiftyMocky/1.0.0/icon.png'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Przemysław Wośko' => 'przemyslaw.wosko@intive.com', 'Andrzej Michnia' => 'amichnia@gmail.com' }
-  s.source           = { :git => 'https://github.com/MakeAWishFoundation/SwiftyMocky.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/GirAppe/SwiftyMocky.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
   s.tvos.deployment_target = '9.0'
@@ -28,8 +28,7 @@ Library that uses metaprogramming technique to generate mocks based on sources, 
 
   s.subspec 'Core' do |core|
       core.source_files = 'Sources/Classes/**/*'
-      core.frameworks = 'XCTest'
       core.dependency 'Sourcery'
-      core.xcconfig = { 'OTHER_SWIFT_FLAGS' => '-DMocky' }
+      core.xcconfig = { 'OTHER_SWIFT_FLAGS' => '-DMockyInApp' }
   end
 end
